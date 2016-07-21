@@ -21,7 +21,7 @@ var GoogleOauth2Bearer = Oauth2Bearer.extend({
   scope: configurable('scope', 'email'),
 
   redirectUri: configurable('redirectUri',
-                            'http://localhost:8000/oauth2callback')
+                            'http://localhost:4200/oauth2callback')
 });
 
 export default GoogleOauth2Bearer;
