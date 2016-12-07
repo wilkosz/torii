@@ -8,21 +8,21 @@ module.exports = {
       }
     },
     {
-      name: 'Ember 1.13.7',
+      name: 'Ember 1.13.16',
       dependencies: {
-        'ember': '1.13.7'
+        'ember': '1.13.16'
       }
     },
     {
-      name: 'Ember 2.0.2',
+      name: 'Ember 2.4.6',
       dependencies: {
-        'ember': '2.0.2'
+        'ember': '2.4.6'
       }
     },
     {
-      name: 'Ember 2.1.0',
+      name: 'Ember 2.8.1',
       dependencies: {
-        'ember': '2.1.0'
+        'ember': '2.8.1'
       }
     },
     {
@@ -41,7 +41,16 @@ module.exports = {
       },
       resolutions: {
         'ember': 'beta'
+      },
+    {
+      name: 'Ember Release',
+      dependencies: {
+        'ember': 'components/ember#release'
+      },
+      resolutions: {
+        'ember': 'release'
       }
+    }
     }
   ]
 };
