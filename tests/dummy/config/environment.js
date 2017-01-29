@@ -39,6 +39,15 @@ module.exports = function(environment) {
         },
         'facebook-oauth2': {
           apiKey:      '744221908941738',
+        },
+        'google-oauth2-bearer-v2' : {
+          // put your Google client ID here
+          apiKey: '139338504777-321kme2daihrj8kr8g739ntne4h2bghk.apps.googleusercontent.com',
+          // use the same URI here as one configured in your Google developer console
+          redirectUri: 'http://torii-example.com:4200/torii/redirect.html',
+          // for a list of all possible scopes, see
+          // https://developers.google.com/identity/protocols/googlescopes
+          scope: 'https://www.googleapis.com/auth/userinfo.email'
         }
       }
     }
