@@ -41,7 +41,8 @@ module.exports = {
       },
       resolutions: {
         'ember': 'beta'
-      },
+      }
+    },
     {
       name: 'Ember Release',
       dependencies: {
@@ -50,7 +51,6 @@ module.exports = {
       resolutions: {
         'ember': 'release'
       }
-    }
     }
   ]
 };
