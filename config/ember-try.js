@@ -27,6 +27,7 @@ module.exports = {
     },
     {
       name: 'Ember Canary',
+      allowedToFail: true,
       dependencies: {
         'ember': 'components/ember#canary'
       },
@@ -36,6 +37,7 @@ module.exports = {
     },
     {
       name: 'Ember Beta',
+      allowedToFail: true,
       dependencies: {
         'ember': 'components/ember#beta'
       },
