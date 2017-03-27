@@ -60,7 +60,9 @@ test('session is injectable using inject.service', function(assert){
     torii: Ember.inject.service('torii')
   }));
 
-  var component = lookupFactory(app, 'component:testComponent').create();
+  var DummyRenderer = { componentInitAttrs() {} };
+
+  var component = lookupFactory(app, 'component:testComponent').create({renderer: DummyRenderer});
 
   assert.ok(component.get('session'), 'Component has access to injected session service');
   assert.ok(component.get('torii'), 'Component has access to injected torii service');
