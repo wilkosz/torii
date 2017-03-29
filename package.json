@@ -36,22 +36,7 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
     "ember-try": "^0.2.12",
-    "grunt": "~0.4.2",
-    "grunt-banner": "^0.2.3",
-    "grunt-cli": "~0.1.11",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-concat": "~0.5.0",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-testem-mincer": "~0.5.18",
-    "grunt-contrib-uglify": "~0.6.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-yuidoc": "~0.5.0",
-    "grunt-es3-safe-recast": "^0.1.0",
-    "grunt-es6-module-transpiler": "~0.6.0",
-    "jshint": "~2.5.6",
-    "load-grunt-config": "~0.14.0",
-    "load-grunt-tasks": "~1.0.0"
+    "jshint": "~2.5.6"
   },
   "scripts": {
     "test": "ember try:testall"

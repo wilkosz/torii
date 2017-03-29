@@ -676,10 +676,9 @@ There are a number of ember-cli addons that allow you to use Torii with other pr
   * Clone the repo `git clone git@github.com:Vestorly/torii.git`, `cd torii/`
   * `npm install`
   * `bower install`
-  * `grunt test` for tests.
+  * `npm test` for tests.
   * Or, to run tests in the browser:
-    * Start the server: `grunt server`
-    * Open [http://localhost:8000/test/](http://localhost:8000/test/)
+    * Start the server: `ember test --server`
 
 ## Running the torii examples locally
 
@@ -705,29 +704,15 @@ For more info, see [Hosts at wikipedia](http://en.wikipedia.org/wiki/Hosts_(file
 
 Now, start your server and visit the page:
 
-  * `grunt server`
+  * `ember serve`
   * open `http://torii-example.com:8000/example/basic.html`
-
-## Generate docs
-
-Use [YUIDoc](http://yui.github.io/yuidoc/).
-
-  * Install: `npm install -g yuidocjs`
-  * Generate: `yuidoc lib/`
-  * Output will be put into "docs/"
 
 ## Release a new version
 
-  * Bump version in package.json
-  * Bump version in bower.json
-  * `grunt build-release`
-  * Force commit new/changed files in dist/
-  * Commit changed bower.json, package.json
+  * Bump version in package.json; commit
   * `git tag <version>`
   * `git push --tags`
-  * Publishing a version git tag will automatically register a new bower
-    version
-  * To publish the updated npm module, `npm publish ./`
+  * `npm publish ./`
 
 ## How to help
 
