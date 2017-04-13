@@ -49,3 +49,27 @@ test("Provider generates a URL with required config", function(assert){
         expectedUrl,
         'generates the correct URL');
 });
+
+test("Provider generates a URL with optional parameters", function(assert){
+  configure({
+    providers: {
+      'google-oauth2-bearer': {
+        apiKey: 'abcdef',
+        requestVisibleActions: 'http://some-url.com',
+        hd: 'google.com'
+      }
+    }
+  });
+
+  var expectedUrl = provider.get('baseUrl') + '?' + 'response_type=token' +
+          '&client_id=' + 'abcdef' +
+          '&redirect_uri=' + encodeURIComponent(provider.get('redirectUri')) +
+          '&state=' + provider.get('state') +
+          '&scope=email' +
+          '&request_visible_actions=' + encodeURIComponent('http://some-url.com') +
+          '&hd=google.com';
+
+  assert.equal(provider.buildUrl(),
+        expectedUrl,
+        'generates the correct URL');
+});
