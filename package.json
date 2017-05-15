@@ -1,6 +1,6 @@
 {
   "name": "torii",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "A set of clean abstractions for authentication in Ember.js",
   "directories": {
     "lib": "lib"
@@ -57,8 +57,7 @@
     "name": "Vestorly",
     "email": "hello@vestorly.com"
   },
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Matt Beale",
       "email": "matt.beale@madhatted.com"
     },
@@ -71,8 +70,7 @@
       "email": "hello@vestorly.com"
     }
   ],
-  "maintainers": [
-    {
+  "maintainers": [{
       "name": "Matt Beale",
       "email": "matt.beale@madhatted.com"
     },
