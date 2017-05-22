@@ -1,5 +1,7 @@
 import bootstrapRouting from 'torii/bootstrap/routing';
 import { getConfiguration } from 'torii/configuration';
+import getRouterInstance from 'torii/compat/get-router-instance';
+import getRouterLib from 'torii/compat/get-router-lib';
 import "torii/router-dsl-ext";
 
 export default {
@@ -11,11 +13,10 @@ export default {
       return;
     }
 
-    // backwards compat for Ember < 2.0
-    var router = applicationInstance.get('router') || applicationInstance.lookup('router:main');
+    let router = getRouterInstance(applicationInstance);
     var setupRoutes = function(){
-      var _router = router._routerMicrolib || router.router;
-      var authenticatedRoutes = _router.authenticatedRoutes;
+      let routerLib = getRouterLib(router);
+      var authenticatedRoutes = routerLib.authenticatedRoutes;
       var hasAuthenticatedRoutes = !Ember.isEmpty(authenticatedRoutes);
       if (hasAuthenticatedRoutes) {
         bootstrapRouting(applicationInstance, authenticatedRoutes);
