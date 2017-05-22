@@ -1,3 +1,5 @@
+import getRouterLib from 'torii/compat/get-router-lib';
+
 var Router = Ember.Router;
 var proto = Ember.RouterDSL.prototype;
 
@@ -12,7 +14,7 @@ Router.reopen({
   _initRouterJs: function() {
     currentMap = [];
     this._super.apply(this, arguments);
-    let routerLib = this._routerMicrolib || this.router;
+    let routerLib = getRouterLib(this);
     routerLib.authenticatedRoutes = currentMap;
   }
 });
