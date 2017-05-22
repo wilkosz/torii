@@ -11,9 +11,11 @@ export default {
       return;
     }
 
-    var router = applicationInstance.get('router');
+    // backwards compat for Ember < 2.0
+    var router = applicationInstance.get('router') || applicationInstance.lookup('router:main');
     var setupRoutes = function(){
-      var authenticatedRoutes = router.router.authenticatedRoutes;
+      var _router = router._routerMicrolib || router.router;
+      var authenticatedRoutes = _router.authenticatedRoutes;
       var hasAuthenticatedRoutes = !Ember.isEmpty(authenticatedRoutes);
       if (hasAuthenticatedRoutes) {
         bootstrapRouting(applicationInstance, authenticatedRoutes);

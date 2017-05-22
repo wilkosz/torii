@@ -12,6 +12,7 @@ Router.reopen({
   _initRouterJs: function() {
     currentMap = [];
     this._super.apply(this, arguments);
-    this.router.authenticatedRoutes = currentMap;
+    let routerLib = this._routerMicrolib || this.router;
+    routerLib.authenticatedRoutes = currentMap;
   }
 });
