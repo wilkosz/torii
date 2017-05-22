@@ -7,10 +7,14 @@ import randomUrlSafe from 'torii/lib/random-url-safe';
 var computed = Ember.computed;
 
 function currentUrl(){
-  return [window.location.protocol,
-          "//",
-          window.location.host,
-          window.location.pathname].join('');
+  var url = [window.location.protocol,
+             "//",
+             window.location.host,
+             window.location.pathname].join('');
+  if (url.substr(-1) !== '/') {
+    url += '/';
+  }
+  return url;
 }
 
 /**
@@ -102,7 +106,7 @@ var Oauth2 = Provider.extend({
   responseParams: requiredProperty(),
 
   redirectUri: computed(function defaultRedirectUri(){
-    return currentUrl();
+    return `${currentUrl()}torii/redirect.html`;
   }),
 
   buildQueryString: function(){

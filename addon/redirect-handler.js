@@ -7,7 +7,7 @@
  */
 
 import PopupIdSerializer from "./lib/popup-id-serializer";
-import { CURRENT_REQUEST_KEY } from "./mixins/ui-service-mixin";
+import { CURRENT_REQUEST_KEY, WARNING_KEY } from "./mixins/ui-service-mixin";
 import configuration from 'torii/configuration';
 
 var RedirectHandler = Ember.Object.extend({
@@ -20,6 +20,7 @@ var RedirectHandler = Ember.Object.extend({
       windowObject.localStorage.removeItem(CURRENT_REQUEST_KEY);
       if (pendingRequestKey) {
         var url = windowObject.location.toString();
+        windowObject.localStorage.setItem(WARNING_KEY, 'true');
         windowObject.localStorage.setItem(pendingRequestKey, url);
 
         var remoteServiceName = configuration.remoteServiceName || 'popup';
