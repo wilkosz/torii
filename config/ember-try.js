@@ -8,9 +8,9 @@ module.exports = {
       }
     },
     {
-      name: 'Ember 1.13.13',
+      name: 'Ember 1.13',
       dependencies: {
-        'ember': '1.13.13'
+        'ember': '~1.13.0'
       }
     },
     {
