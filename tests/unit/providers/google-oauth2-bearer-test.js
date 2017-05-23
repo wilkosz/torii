@@ -9,7 +9,7 @@ let { module, test } = QUnit;
 let originalConfiguration;
 
 module('Unit - GoogleAuth2BearerProvider', {
-  setup: function(){
+  beforeEach() {
     originalConfiguration = getConfiguration();
     configure({
       providers: {
@@ -18,7 +18,7 @@ module('Unit - GoogleAuth2BearerProvider', {
     });
     provider = GoogleBearerProvider.create();
   },
-  teardown: function(){
+  afterEach() {
     Ember.run(provider, 'destroy');
     configure(originalConfiguration);
   }

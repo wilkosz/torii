@@ -35,11 +35,11 @@ var buildMockStorageEvent = function(popupId, redirectUrl){
 };
 
 module("Popup - Unit", {
-  setup: function(){
+  beforeEach() {
     popup = Popup.create();
     localStorage.removeItem(CURRENT_REQUEST_KEY);
   },
-  teardown: function(){
+  afterEach() {
     localStorage.removeItem(CURRENT_REQUEST_KEY);
     window.open = originalWindowOpen;
     Ember.run(popup, 'destroy');

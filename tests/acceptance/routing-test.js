@@ -11,14 +11,14 @@ let configuration = rawConfig.torii;
 var app, originalSessionServiceName;
 
 module('Routing - Acceptance', {
-  setup: function(){
+  beforeEach() {
     originalSessionServiceName = configuration.sessionServiceName;
     delete configuration.sessionServiceName;
   },
 
-  teardown: function(){
-    Ember.run(app, 'destroy');
+  afterEach() {
     configuration.sessionServiceName = originalSessionServiceName;
+    Ember.run(app, 'destroy');
   }
 });
 
@@ -193,7 +193,7 @@ function bootApp(attrs) {
     Router: Router
   });
 
-  setup();
+  setup(app);
 
   Ember.run(function(){
     app.advanceReadiness();

@@ -9,13 +9,10 @@ import GithubOauth2Provider from 'torii/providers/github-oauth2';
 import AzureAdOauth2Provider from 'torii/providers/azure-ad-oauth2';
 import StripeConnectProvider from 'torii/providers/stripe-connect';
 import EdmodoConnectProvider from 'torii/providers/edmodo-connect';
-import configuration from 'torii/configuration';
 
 import ToriiService from 'torii/services/torii';
 import PopupService from 'torii/services/popup';
 import IframeService from 'torii/services/iframe';
-
-import { hasRegistration } from 'torii/lib/container-utils';
 
 export default function(application) {
   application.register('service:torii', ToriiService);

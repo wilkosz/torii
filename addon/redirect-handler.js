@@ -6,7 +6,6 @@
  * and should postMessage this data to window.opener
  */
 
-import PopupIdSerializer from "./lib/popup-id-serializer";
 import { CURRENT_REQUEST_KEY, WARNING_KEY } from "./mixins/ui-service-mixin";
 import configuration from 'torii/configuration';
 
