@@ -4,7 +4,11 @@ import lookup from '../helpers/lookup';
 import { module, test } from 'qunit';
 
 function lookupFactory(app, key) {
-  return app.__container__.lookupFactory(key);
+  if (app.__container__.factoryFor) {
+    return app.__container__.factoryFor(key);
+  } else {
+    return app.__container__.lookupFactory(key);
+  }
 }
 
 let toriiConfiguration = configuration.torii;
