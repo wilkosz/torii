@@ -130,7 +130,7 @@ test('authenticated routes get authenticate method', function(assert){
   assert.ok(!unauthenticatedRoute.authenticate, "authenticate function is not present");
 });
 
-test('lazyily created authenticated routes get authenticate method', function(assert){
+test('lazily created authenticated routes get authenticate method', function(assert){
   assert.expect(2);
   configuration.sessionServiceName = 'session';
 
@@ -193,7 +193,7 @@ function bootApp(attrs) {
     Router: Router
   });
 
-  setup(app);
+  setup();
 
   Ember.run(function(){
     app.advanceReadiness();
