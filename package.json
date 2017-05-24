@@ -80,9 +80,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "ember-cli-babel": "^6.0.0",
-    "broccoli-funnel": "^1.0.1",
-    "broccoli-string-replace": "^0.1.1",
-    "broccoli-merge-trees": "^1.1.1"
+    "ember-cli-babel": "^6.0.0"
   }
 }
