@@ -79,7 +79,7 @@ module.exports = function(environment) {
       providers: {
         'facebook-oauth2': {
           apiKey:      'facebook-app-id',
-          redirectUri: '/my-custom-landing-uri' // default is the current URL
+          redirectUri: '/my-custom-landing-uri' // default is /torii/redirect.html
         }
       }
     }
@@ -379,6 +379,32 @@ Then in `templates/application.hbs` you might have:
 {{/if}}
 ```
 
+## OAuth Redirects
+
+Torii was originally configured to add an initializer that detects when your
+Ember app has been redirected-to by an OAuth provider, but this has been shown
+to be a potential vulnerability, and best practice is to use the static 
+`/torii/redirect.html` page that the Torii addon makes available as of version
+0.9.0.
+
+Therefore, **the redirect URL you register with the OAuth provider(s) that you
+use should be: `<your app base URL>/torii/redirect.html`**. This is a static
+HTML page that loads no external assets and is configured to interact correctly
+with Torii's `provider#open` promise in your app.
+
+Torii versions after v0.8.4 will log an error message if you do not use the
+Torii-provided redirect HTML page. Using your app as the redirect target is
+deprecated and the functionality will be removed in later versions of Torii.
+
+If you understand the security risks and need to continue using your app as the
+redirect target, you can disable the error message by setting
+`allowUnsafeRedirects: true` in the `torii` section of your
+`config/environment.js`.
+
+By default Torii sets the `redirectUri` to
+`<currentURL>/torii/redirect.html`. If you wish to use the deprecated behavior
+then you will also have to manually configure the `redirectUri` to be `/`.
+
 ## Providers in Torii
 
 Torii is built with several providers for common cases. If you intend to
@@ -670,6 +696,12 @@ Now, start your server and visit the page:
 
   * `ember serve`
   * open `http://torii-example.com:8000/example/basic.html`
+
+## Security
+
+If you discover a vulnerability in Torii please inform us by emailing
+security@201-created.com. You can encrypt the message using our [public
+key](https://keybase.io/bantic/pgp_keys.asc).
 
 ## Release a new version
 
