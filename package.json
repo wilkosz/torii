@@ -56,7 +56,8 @@
     "name": "Vestorly",
     "email": "hello@vestorly.com"
   },
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Matt Beale",
       "email": "matt.beale@madhatted.com"
     },
@@ -69,7 +70,8 @@
       "email": "hello@vestorly.com"
     }
   ],
-  "maintainers": [{
+  "maintainers": [
+    {
       "name": "Matt Beale",
       "email": "matt.beale@madhatted.com"
     },
