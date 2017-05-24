@@ -13,7 +13,7 @@ var originalGetScript = $.getScript,
 let providerConfiguration;
 
 module('Facebook Connect - Integration', {
-  setup: function(){
+  beforeEach() {
     app = startApp({loadInitializers: true});
     torii = lookup(app, 'service:torii');
     providerConfiguration = {
@@ -26,7 +26,7 @@ module('Facebook Connect - Integration', {
     });
     window.FB = buildFBMock();
   },
-  teardown: function(){
+  afterEach() {
     window.FB = originalFB;
     $.getScript = originalGetScript;
     Ember.run(app, 'destroy');
