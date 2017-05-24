@@ -399,7 +399,8 @@ deprecated and the functionality will be removed in later versions of Torii.
 If you understand the security risks and need to continue using your app as the
 redirect target, you can disable the error message by setting
 `allowUnsafeRedirects: true` in the `torii` section of your
-`config/environment.js`.
+`config/environment.js`. For more details see [this blog
+post](https://medium.com/@bantic/torii-vulnerability-disclosure-dd98b6d88ec3).
 
 By default Torii sets the `redirectUri` to
 `<currentURL>/torii/redirect.html`. If you wish to use the deprecated behavior
