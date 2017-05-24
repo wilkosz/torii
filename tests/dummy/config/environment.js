@@ -19,8 +19,26 @@ module.exports = function(environment) {
     },
     torii: {
       providers: {
+        'linked-in-oauth2': {
+          apiKey: '772yus6d70pf11'
+        },
         'github-oauth2': {
-          apiKey: '954836589bc32e767422'
+          apiKey: '36564132549469e48c02',
+        },
+        'google-oauth2': {
+          apiKey: '139338504777-321kme2daihrj8kr8g739ntne4h2bghk.apps.googleusercontent.com',
+          redirectUri: 'http://torii-example.com:4200/torii/redirect.html'
+        },
+        'google-oauth2-bearer': {
+          apiKey: '139338504777-321kme2daihrj8kr8g739ntne4h2bghk.apps.googleusercontent.com',
+          scope: 'email',
+          redirectUri: 'http://torii-example.com:4200/torii/redirect.html'
+        },
+        'facebook-connect': {
+          appId:      '744221908941738'
+        },
+        'facebook-oauth2': {
+          apiKey:      '744221908941738',
         }
       }
     }

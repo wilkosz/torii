@@ -672,13 +672,9 @@ There are a number of ember-cli addons that allow you to use Torii with other pr
 
 ## Running the torii examples locally
 
-  * Clone the repo `git clone git@github.com:Vestorly/torii.git`, `cd torii/`
-  * `npm install`
-  * `bower install`
-
-The torii example apps (at Facebook, Google, LinkedIn, etc.) are all
+The torii example OAuth apps (at Facebook, Google, LinkedIn, etc.) are all
 configured to use
-`http://torii-example.com:8000/example/basic.html` as their redirect
+`http://torii-example.com:4200/torii/redirect.html` as their redirect
 uri, so you will need to make an alias in your hosts file that points
 **torii-example.com** to localhost, and you must view the examples from
 that same host.
@@ -692,10 +688,14 @@ The `/etc/hosts` equivalent filepath on Windows is:
 
 For more info, see [Hosts at wikipedia](http://en.wikipedia.org/wiki/Hosts_(file)).
 
+  * Clone the repo `git clone git@github.com:Vestorly/torii.git`, `cd torii/`
+  * `npm install`
+  * `ember serve`
+
 Now, start your server and visit the page:
 
   * `ember serve`
-  * open `http://torii-example.com:8000/example/basic.html`
+  * open `http://torii-example.com:4200`
 
 ## Security
 
