@@ -1,8 +1,10 @@
 /* global FB, $ */
 
 /**
- * This class implements authentication against facebook
- * connect using the Facebook SDK.
+ * This class implements OAuth authorization for Facebook
+ * connect using the Facebook Connect SDK.
+ * It eagerly loads the Facebook Connect script using the settings provided
+ * unless it detects the presence of the global `window.FB`.
  */
 
 import Provider from 'torii/providers/base';
@@ -18,6 +20,9 @@ function fbLoad(settings){
   var locale = settings.locale;
   delete settings.locale;
   fbPromise = new Ember.RSVP.Promise(function(resolve){
+    if (window.FB) {
+      return resolve();
+    }
     window.fbAsyncInit = function(){
       FB.init(settings);
       Ember.run(null, resolve);
