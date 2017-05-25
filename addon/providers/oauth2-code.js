@@ -105,7 +105,7 @@ var Oauth2 = Provider.extend({
   */
   responseParams: requiredProperty(),
 
-  redirectUri: computed(function defaultRedirectUri(){
+  redirectUri: configurable('redirectUri', function (){
     return `${currentUrl()}torii/redirect.html`;
   }),
 
