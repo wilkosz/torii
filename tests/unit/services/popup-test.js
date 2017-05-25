@@ -104,6 +104,7 @@ test("open rejects when window does not open", function(assert){
       assert.ok(false, 'resolves promise');
     }, function(){
       assert.ok(true, 'rejected the open promise');
+      assert.ok(!localStorage.getItem(CURRENT_REQUEST_KEY), 'current request key is removed');
     }).finally(done);
   });
 });
