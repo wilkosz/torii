@@ -60,6 +60,14 @@ module.exports = {
       }
     },
     {
+      name: 'ember-2.12.2',
+      npm: {
+        devDependencies: {
+          'ember-source': '2.12.2'
+        },
+      }
+    },
+    {
       name: 'Ember Canary',
       allowedToFail: true,
       bower: {
