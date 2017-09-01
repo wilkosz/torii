@@ -6,7 +6,7 @@ module.exports = {
   included: function(app) {
     var hostApp = this._findApp(app);
     var toriiConfig = hostApp.project.config(app.env)['torii'];
-    if (!toriiConfig) {
+    if (!toriiConfig && hostApp === app) {
       console.warn('Torii is installed but not configured in config/environment.js!');
     }
 
