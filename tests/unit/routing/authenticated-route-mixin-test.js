@@ -1,3 +1,11 @@
+import EmberRouter from '@ember/routing/router';
+import { later } from '@ember/runloop';
+import {
+  Promise as EmberPromise,
+  resolve,
+  reject
+} from 'rsvp';
+import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'torii/routing/authenticated-route-mixin';
 import QUnit from 'qunit';
 import { configure, getConfiguration } from 'torii/configuration';
@@ -20,7 +28,7 @@ module('Authenticated Route Mixin - Unit', {
 test("beforeModel calls authenicate after _super#beforeModel", function(assert){
   var route;
   var callOrder = [];
-  route = Ember.Route
+  route = Route
     .extend({
       beforeModel: function() {
         callOrder.push('super');
@@ -41,11 +49,11 @@ test("beforeModel calls authenicate after _super#beforeModel", function(assert){
 test("route respects beforeModel super priority when promise is returned", function(assert){
   var route;
   var callOrder = [];
-  route = Ember.Route
+  route = Route
     .extend({
       beforeModel: function() {
-        return new Ember.RSVP.Promise(function(resolve){
-          Ember.run.later(function(){
+        return new EmberPromise(function(resolve){
+          later(function(){
             callOrder.push('super');
             resolve();
           }, 20);
@@ -87,7 +95,7 @@ test('attempting authentication calls fetchDefaultProvider', function(assert){
       isAuthenticated: undefined,
       fetch: function(){
         fetchCalled = true;
-        return Ember.RSVP.resolve();
+        return resolve();
       }
     }
   });
@@ -106,7 +114,7 @@ test('failed authentication calls accessDenied', function(assert){
       isAuthenticated: undefined,
       fetch: function(){
         fetchCalled = true;
-        return Ember.RSVP.reject();
+        return reject();
       }
     },
     accessDenied: function() {
@@ -129,7 +137,7 @@ test('failed authentication causes accessDenied action to be sent', function(ass
       isAuthenticated: undefined,
       fetch: function(){
         fetchCalled = true;
-        return Ember.RSVP.reject();
+        return reject();
       }
     }
   });
@@ -157,7 +165,7 @@ test('failed authentication causes accessDenied action to be sent with transitio
       isAuthenticated: undefined,
       fetch: function(){
         fetchCalled = true;
-        return Ember.RSVP.reject();
+        return reject();
       }
     },
     
@@ -173,5 +181,5 @@ test('failed authentication causes accessDenied action to be sent with transitio
 });
 
 function createAuthenticatedRoute(attrs) {
-  return Ember.Router.extend(AuthenticatedRouteMixin, attrs).create();
+  return EmberRouter.extend(AuthenticatedRouteMixin, attrs).create();
 }

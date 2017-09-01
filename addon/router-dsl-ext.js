@@ -1,6 +1,6 @@
+import Router from '@ember/routing/router';
 import getRouterLib from 'torii/compat/get-router-lib';
 
-var Router = Ember.Router;
 var proto = Ember.RouterDSL.prototype;
 
 var currentMap = null;

@@ -1,3 +1,5 @@
+import { resolve } from 'rsvp';
+import { run } from '@ember/runloop';
 import { getConfiguration, configure } from 'torii/configuration';
 
 import BaseProvider from 'torii/providers/oauth2-bearer';
@@ -25,7 +27,7 @@ module('MockOauth2Provider (oauth2-bearer subclass) - Unit', {
     provider = Provider.create();
   },
   afterEach() {
-    Ember.run(provider, 'destroy');
+    run(provider, 'destroy');
     configure(originalConfiguration);
   }
 });
@@ -85,13 +87,13 @@ test('Provider#open assert.throws when any required response params are missing'
     open: function(/*url, responseParams*/){
       assert.ok(true, 'calls popup.open');
 
-      return Ember.RSVP.resolve({state: 'state'});
+      return resolve({state: 'state'});
     }
   };
 
   provider.set('popup', mockPopup);
 
-  Ember.run(function(){
+  run(function(){
     provider.open().then(function(){
       assert.ok(false, '#open should not resolve');
     }).catch(function(e){

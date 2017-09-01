@@ -1,17 +1,18 @@
-import Ember from 'ember';
+import { resolve } from 'rsvp';
+import EmberObject from '@ember/object';
 
-var dummyUser = Ember.Object.create({
+var dummyUser = EmberObject.create({
   email: 'someUser@example.com'
 });
 
-export default Ember.Object.extend({
+export default EmberObject.extend({
   open: function(){
-    return Ember.RSVP.resolve({
+    return resolve({
       currentUser: dummyUser
     });
   },
   fetch: function(){
-    return Ember.RSVP.resolve({
+    return resolve({
       currentUser: dummyUser
     });
   }

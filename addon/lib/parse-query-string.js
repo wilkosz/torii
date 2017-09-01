@@ -1,4 +1,6 @@
-export default Ember.Object.extend({
+import EmberObject from '@ember/object';
+
+export default EmberObject.extend({
   init: function() {
     this.validKeys = this.keys;
   },

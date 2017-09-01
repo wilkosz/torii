@@ -1,6 +1,7 @@
+import Mixin from '@ember/object/mixin';
 import { getConfiguration } from 'torii/configuration';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   beforeModel: function (transition) {
     var route = this;
     var superBefore = this._super.apply(this, arguments);

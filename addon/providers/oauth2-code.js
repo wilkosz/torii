@@ -1,10 +1,9 @@
+import { computed } from '@ember/object';
 import Provider from 'torii/providers/base';
-import {configurable} from 'torii/configuration';
+import { configurable } from 'torii/configuration';
 import QueryString from 'torii/lib/query-string';
 import requiredProperty from 'torii/lib/required-property';
 import randomUrlSafe from 'torii/lib/random-url-safe';
-
-var computed = Ember.computed;
 
 function currentUrl(){
   var url = [window.location.protocol,

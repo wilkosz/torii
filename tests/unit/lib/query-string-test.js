@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import EmberObject from '@ember/object';
 import QueryString from 'torii/lib/query-string';
 import QUnit from 'qunit';
 
@@ -13,7 +14,7 @@ var obj,
 
 module('QueryString - Unit', {
   beforeEach() {
-    obj = Ember.Object.create({
+    obj = EmberObject.create({
       clientId:         clientId,
       responseType:     responseType,
       redirectUri:      redirectUri,
@@ -23,7 +24,7 @@ module('QueryString - Unit', {
     });
   },
   afterEach() {
-    Ember.run(obj, 'destroy');
+    run(obj, 'destroy');
   }
 });
 

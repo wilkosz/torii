@@ -1,4 +1,4 @@
-import {configurable} from 'torii/configuration';
+import { configurable } from 'torii/configuration';
 import Oauth2 from 'torii/providers/oauth2-code';
 
 export default Oauth2.extend({
