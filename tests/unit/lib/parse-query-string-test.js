@@ -3,7 +3,7 @@ let { module, test } = QUnit;
 
 import ParseQueryString from 'torii/lib/parse-query-string';
 
-module('ParseQueryString - Unit');
+module('Unit | Lib | ParseQueryString');
 
 test('parses each passed key', function(assert){
   var url = 'http://localhost.dev:3000/xyz/?code=abcdef';

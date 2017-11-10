@@ -11,7 +11,7 @@ var obj,
     redirectUri = 'http://localhost.dev:3000/xyz/pdq',
     optionalProperty = 'i-am-optional';
 
-module('QueryString - Unit', {
+module('Unit | Lib | QueryString', {
   beforeEach() {
     obj = Ember.Object.create({
       clientId:         clientId,
