@@ -6,7 +6,7 @@ import "torii/router-dsl-ext";
 
 export default {
   name: 'torii-setup-routes',
-  initialize: function(applicationInstance, registry){
+  initialize(applicationInstance /*, registry */){
     const configuration = getConfiguration();
 
     if (!configuration.sessionServiceName) {
