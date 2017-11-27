@@ -1,8 +1,10 @@
+import Ember from 'ember';
+import { Promise as EmberPromise, reject } from 'rsvp';
+import Service from '@ember/service';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
 import createStateMachine from 'torii/session/state-machine';
 import { getOwner } from 'torii/lib/container-utils';
-
-var computed = Ember.computed;
-var on = Ember.on;
 
 function lookupAdapter(container, authenticationType){
   var adapter = container.lookup('torii-adapter:'+authenticationType);
@@ -12,7 +14,7 @@ function lookupAdapter(container, authenticationType){
   return adapter;
 }
 
-export default Ember.Service.extend(Ember._ProxyMixin, {
+export default Service.extend(Ember._ProxyMixin, {
   state: null,
 
   stateMachine: computed(function(){
@@ -36,7 +38,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
         torii     = getOwner(this).lookup('service:torii'),
         sm        = this.get('stateMachine');
 
-    return new Ember.RSVP.Promise(function(resolve){
+    return new EmberPromise(function(resolve){
       sm.send('startOpen');
       resolve();
     }).then(function(){
@@ -52,7 +54,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
       return user;
     }).catch(function(error){
       sm.send('failOpen', error);
-      return Ember.RSVP.reject(error);
+      return reject(error);
     });
   },
 
@@ -60,7 +62,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
     var owner     = getOwner(this),
         sm        = this.get('stateMachine');
 
-    return new Ember.RSVP.Promise(function(resolve){
+    return new EmberPromise(function(resolve){
       sm.send('startFetch');
       resolve();
     }).then(function(){
@@ -74,7 +76,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
       return;
     }).catch(function(error){
       sm.send('failFetch', error);
-      return Ember.RSVP.reject(error);
+      return reject(error);
     });
   },
 
@@ -82,7 +84,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
     var owner     = getOwner(this),
         sm        = this.get('stateMachine');
 
-    return new Ember.RSVP.Promise(function(resolve){
+    return new EmberPromise(function(resolve){
       sm.send('startClose');
       resolve();
     }).then(function(){
@@ -92,7 +94,7 @@ export default Ember.Service.extend(Ember._ProxyMixin, {
       sm.send('finishClose');
     }).catch(function(error){
       sm.send('failClose', error);
-      return Ember.RSVP.reject(error);
+      return reject(error);
     });
   }
 });

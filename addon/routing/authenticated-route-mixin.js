@@ -1,6 +1,8 @@
+import { resolve } from 'rsvp';
+import Mixin from '@ember/object/mixin';
 import { getConfiguration } from 'torii/configuration';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   beforeModel: function (transition) {
     var route = this;
     var superBefore = this._super.apply(this, arguments);
@@ -32,7 +34,7 @@ export default Ember.Mixin.create({
       }
     } else {
       // no-op; cause the user is already authenticated
-      return Ember.RSVP.resolve();
+      return resolve();
     }
   },
   accessDenied: function (transition) {

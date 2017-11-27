@@ -1,5 +1,6 @@
-var camelize = Ember.String.camelize,
-    get      = Ember.get;
+import { A } from '@ember/array';
+import { camelize } from '@ember/string';
+import EmberObject, { get } from '@ember/object';
 
 function isValue(value){
   return (value || value === false);
@@ -32,11 +33,11 @@ function getOptionalParamValue(obj, paramName){
   return getParamValue(obj, paramName, true);
 }
 
-export default Ember.Object.extend({
+export default EmberObject.extend({
   init: function() {
     this.obj               = this.provider;
-    this.urlParams         = Ember.A(this.requiredParams.slice()).uniq();
-    this.optionalUrlParams = Ember.A(this.optionalParams ? this.optionalParams.slice() : []).uniq();
+    this.urlParams         = A(this.requiredParams.slice()).uniq();
+    this.optionalUrlParams = A(this.optionalParams ? this.optionalParams.slice() : []).uniq();
 
     this.optionalUrlParams.forEach(function(param){
       if (this.urlParams.indexOf(param) > -1) {
@@ -49,7 +50,7 @@ export default Ember.Object.extend({
     var urlParams         = this.urlParams,
         optionalUrlParams = this.optionalUrlParams,
         obj               = this.obj,
-        keyValuePairs     = Ember.A([]);
+        keyValuePairs     = A([]);
 
     urlParams.forEach(function(paramName){
       var paramValue = getParamValue(obj, paramName);

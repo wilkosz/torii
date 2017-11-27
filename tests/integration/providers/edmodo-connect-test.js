@@ -1,3 +1,5 @@
+import { run } from '@ember/runloop';
+import { resolve } from 'rsvp';
 var torii, app;
 
 import startApp from '../../helpers/start-app';
@@ -15,7 +17,7 @@ module('Integration | Provider | Edmodo Connect', {
     mockPopup = {
       open: function(){
         opened = true;
-        return Ember.RSVP.resolve({ access_token: 'test' });
+        return resolve({ access_token: 'test' });
       }
     };
     app.register('torii-service:mock-popup', mockPopup, {instantiate: false});
@@ -34,13 +36,13 @@ module('Integration | Provider | Edmodo Connect', {
   },
   afterEach() {
     opened = false;
-    Ember.run(app, 'destroy');
+    run(app, 'destroy');
   }
 });
 
 test("Opens a popup to Edmodo", function(assert){
   assert.expect(1);
-  Ember.run(function(){
+  run(function(){
     torii.open('edmodo-connect').finally(function(){
       assert.ok(opened, "Popup service is opened");
     });

@@ -1,3 +1,8 @@
+import $ from 'jquery';
+import { later, run, cancel } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
+import Mixin from '@ember/object/mixin';
+import { on } from '@ember/object/evented';
 import UUIDGenerator from 'torii/lib/uuid-generator';
 import PopupIdSerializer from 'torii/lib/popup-id-serializer';
 import ParseQueryString from 'torii/lib/parse-query-string';
@@ -6,18 +11,16 @@ export const CURRENT_REQUEST_KEY = '__torii_request';
 export const WARNING_KEY = '__torii_redirect_warning';
 import { getConfiguration } from 'torii/configuration';
 
-var on = Ember.on;
-
 function parseMessage(url, keys){
   var parser = ParseQueryString.create({url: url, keys: keys});
   var data = parser.parse();
   return data;
 }
 
-var ServicesMixin = Ember.Mixin.create({
+var ServicesMixin = Mixin.create({
 
-  init: function(){
-    this._super.apply(this, arguments);
+  init(){
+    this._super(...arguments);
     this.remoteIdGenerator = this.remoteIdGenerator || UUIDGenerator;
   },
 
@@ -36,7 +39,7 @@ var ServicesMixin = Ember.Mixin.create({
     var service   = this,
         lastRemote = this.remote;
 
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    return new EmberPromise(function(resolve, reject){
       if (lastRemote) {
         service.close();
       }
@@ -85,19 +88,19 @@ var ServicesMixin = Ember.Mixin.create({
         }
         // If we don't receive a message before the timeout, we fail. Normally,
         // the message will be received and the window will close immediately.
-        service.timeout = Ember.run.later(service, function() {
+        service.timeout = later(service, function() {
           reject(new Error("remote was closed, authorization was denied, or an authentication message otherwise not received before the window closed."));
         }, 100);
       });
 
-      Ember.$(window).on('storage.torii', function(event){
+      $(window).on('storage.torii', function(event){
         var storageEvent = event.originalEvent;
 
         var remoteIdFromEvent = PopupIdSerializer.deserialize(storageEvent.key);
         if (remoteId === remoteIdFromEvent){
           var data = parseMessage(storageEvent.newValue, keys);
           localStorage.removeItem(storageEvent.key);
-          Ember.run(function() {
+          run(function() {
             resolve(data);
           });
         }
@@ -106,7 +109,7 @@ var ServicesMixin = Ember.Mixin.create({
       // didClose will reject this same promise, but it has already resolved.
       service.close();
 
-      Ember.$(window).off('storage.torii');
+      $(window).off('storage.torii');
     });
   },
 
@@ -124,7 +127,7 @@ var ServicesMixin = Ember.Mixin.create({
   },
 
   schedulePolling: function(){
-    this.polling = Ember.run.later(this, function(){
+    this.polling = later(this, function(){
       this.pollRemote();
       this.schedulePolling();
     }, 35);
@@ -132,12 +135,12 @@ var ServicesMixin = Ember.Mixin.create({
 
   // Clear the timeout, in case it hasn't fired.
   clearTimeout: function(){
-    Ember.run.cancel(this.timeout);
+    cancel(this.timeout);
     this.timeout = null;
   },
 
   stopPolling: on('didClose', function(){
-    Ember.run.cancel(this.polling);
+    cancel(this.polling);
   })
 });
 

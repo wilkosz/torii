@@ -4,7 +4,7 @@
  */
 
 import Provider from 'torii/providers/base';
-import {configurable} from 'torii/configuration';
+import { configurable } from 'torii/configuration';
 
 var Oauth1 = Provider.extend({
   name: 'oauth1',
