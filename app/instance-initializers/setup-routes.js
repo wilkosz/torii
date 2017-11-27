@@ -1,3 +1,6 @@
+/* eslint-disable ember/new-module-imports */
+
+import Ember from 'ember';
 import bootstrapRouting from 'torii/bootstrap/routing';
 import { getConfiguration } from 'torii/configuration';
 import getRouterInstance from 'torii/compat/get-router-instance';

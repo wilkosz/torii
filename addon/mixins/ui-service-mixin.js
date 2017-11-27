@@ -19,8 +19,8 @@ function parseMessage(url, keys){
 
 var ServicesMixin = Mixin.create({
 
-  init: function(){
-    this._super.apply(this, arguments);
+  init(){
+    this._super(...arguments);
     this.remoteIdGenerator = this.remoteIdGenerator || UUIDGenerator;
   },
 

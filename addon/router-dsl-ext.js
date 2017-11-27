@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Router from '@ember/routing/router';
 import getRouterLib from 'torii/compat/get-router-lib';
 

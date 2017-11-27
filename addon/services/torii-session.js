@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { Promise as EmberPromise, reject } from 'rsvp';
 import Service from '@ember/service';
 import { on } from '@ember/object/evented';
