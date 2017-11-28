@@ -84,7 +84,7 @@ test('Provider#open assert.throws when any required response params are missing'
   });
 
   var mockPopup = {
-    open: function(/*url, responseParams*/){
+    open() /*url, responseParams*/{
       assert.ok(true, 'calls popup.open');
 
       return resolve({state: 'state'});

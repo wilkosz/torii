@@ -110,7 +110,7 @@ test("#fetch dummy-success session successfully opens", function(assert){
 test("#fetch session passes options to adapter", function(assert){
   var adapterFetchCalledWith = null;
   this.application.register("torii-adapter:dummy-success", DummyAdapter.extend({
-    fetch: function(options){
+    fetch(options) {
       adapterFetchCalledWith = options;
       return this._super(options);
     }
@@ -137,7 +137,7 @@ test("#fetch dummy-failure session fails to open", function(assert){
 
 test("#close dummy-success fails in an unauthenticated state", function(assert){
   this.adapter.reopen({
-    close: function(){
+    close() {
       return EmberPromise.resolve();
     }
   });
@@ -154,7 +154,7 @@ test("#close dummy-success fails in an unauthenticated state", function(assert){
 test("#close dummy-success session closes", function(assert){
   signIn(this.session, {currentUser: {email: 'some@email.com'}});
   this.adapter.reopen({
-    close: function(){
+    close() {
       return EmberPromise.resolve();
     }
   });
@@ -202,7 +202,7 @@ test("#close dummy-success session uses named adapter when present", function(as
   signIn(this.session, {currentUser: {email: 'some@email.com'}});
   var correctAdapterCalled = false;
   this.application.register("torii-adapter:dummy-success", DummyAdapter.extend({
-    close: function() {
+    close() {
       correctAdapterCalled = true;
       return this._super();
     }

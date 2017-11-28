@@ -35,7 +35,7 @@ var ServicesMixin = Mixin.create({
   //
   // Services that use this mixin should implement openRemote
   //
-  open: function(url, keys, options){
+  open(url, keys, options) {
     var service   = this,
         lastRemote = this.remote;
 
@@ -113,7 +113,7 @@ var ServicesMixin = Mixin.create({
     });
   },
 
-  close: function(){
+  close() {
     if (this.remote) {
       this.closeRemote();
       this.remote = null;
@@ -122,11 +122,11 @@ var ServicesMixin = Mixin.create({
     this.cleanUp();
   },
 
-  cleanUp: function(){
+  cleanUp() {
     this.clearTimeout();
   },
 
-  schedulePolling: function(){
+  schedulePolling() {
     this.polling = later(this, function(){
       this.pollRemote();
       this.schedulePolling();
@@ -134,7 +134,7 @@ var ServicesMixin = Mixin.create({
   },
 
   // Clear the timeout, in case it hasn't fired.
-  clearTimeout: function(){
+  clearTimeout() {
     cancel(this.timeout);
     this.timeout = null;
   },

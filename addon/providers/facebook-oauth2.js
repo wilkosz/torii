@@ -19,7 +19,7 @@ export default Oauth2.extend({
     return this._super();
   }),
 
-  open: function() {
+  open() {
     return this._super().then(function(authData){
       if (authData.authorizationCode && authData.authorizationCode === '200') {
         // indication that the user hit 'cancel', not 'ok'

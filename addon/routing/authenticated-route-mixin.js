@@ -3,7 +3,7 @@ import Mixin from '@ember/object/mixin';
 import { getConfiguration } from 'torii/configuration';
 
 export default Mixin.create({
-  beforeModel: function (transition) {
+  beforeModel(transition) {
     var route = this;
     var superBefore = this._super.apply(this, arguments);
     if (superBefore && superBefore.then) {
@@ -14,7 +14,7 @@ export default Mixin.create({
       return route.authenticate(transition);
     }
   },
-  authenticate: function (transition) {
+  authenticate(transition) {
     var configuration = getConfiguration();
     var route = this,
       session = this.get(configuration.sessionServiceName),
@@ -37,7 +37,7 @@ export default Mixin.create({
       return resolve();
     }
   },
-  accessDenied: function (transition) {
+  accessDenied(transition) {
     transition.send('accessDenied', transition);
   }
 });

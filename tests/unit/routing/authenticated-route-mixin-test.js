@@ -30,12 +30,12 @@ test("beforeModel calls authenicate after _super#beforeModel", function(assert){
   var callOrder = [];
   route = Route
     .extend({
-      beforeModel: function() {
+      beforeModel() {
         callOrder.push('super');
       }
     })
     .extend(AuthenticatedRouteMixin, {
-      authenticate: function() {
+      authenticate() {
         callOrder.push('mixin');
       }
     }).create();
@@ -51,7 +51,7 @@ test("route respects beforeModel super priority when promise is returned", funct
   var callOrder = [];
   route = Route
     .extend({
-      beforeModel: function() {
+      beforeModel() {
         return new EmberPromise(function(resolve){
           later(function(){
             callOrder.push('super');
@@ -61,7 +61,7 @@ test("route respects beforeModel super priority when promise is returned", funct
       }
     })
     .extend(AuthenticatedRouteMixin, {
-      authenticate: function() {
+      authenticate() {
         callOrder.push('mixin');
       }
     }).create();
@@ -93,7 +93,7 @@ test('attempting authentication calls fetchDefaultProvider', function(assert){
   var route = createAuthenticatedRoute({
     session: {
       isAuthenticated: undefined,
-      fetch: function(){
+      fetch() {
         fetchCalled = true;
         return resolve();
       }
@@ -112,12 +112,12 @@ test('failed authentication calls accessDenied', function(assert){
   var route = createAuthenticatedRoute({
     session: {
       isAuthenticated: undefined,
-      fetch: function(){
+      fetch() {
         fetchCalled = true;
         return reject();
       }
     },
-    accessDenied: function() {
+    accessDenied() {
       accessDeniedCalled = true;
     }
   });
@@ -135,14 +135,14 @@ test('failed authentication causes accessDenied action to be sent', function(ass
   var route = createAuthenticatedRoute({
     session: {
       isAuthenticated: undefined,
-      fetch: function(){
+      fetch() {
         fetchCalled = true;
         return reject();
       }
     }
   });
   return route.authenticate({
-    send: function(actionName) {
+    send(actionName) {
       sentActionName = actionName;
     }
   })
@@ -163,13 +163,13 @@ test('failed authentication causes accessDenied action to be sent with transitio
   var route = createAuthenticatedRoute({
     session: {
       isAuthenticated: undefined,
-      fetch: function(){
+      fetch() {
         fetchCalled = true;
         return reject();
       }
     },
 
-    accessDenied: function(transition) {
+    accessDenied(transition) {
       sentTransition = transition;
     }
   });

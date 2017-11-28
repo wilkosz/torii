@@ -6,12 +6,12 @@ var dummyUser = EmberObject.create({
 });
 
 export default EmberObject.extend({
-  open: function(){
+  open() {
     return resolve({
       currentUser: dummyUser
     });
   },
-  fetch: function(){
+  fetch() {
     return resolve({
       currentUser: dummyUser
     });

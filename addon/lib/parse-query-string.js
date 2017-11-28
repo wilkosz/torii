@@ -1,11 +1,11 @@
 import EmberObject from '@ember/object';
 
 export default EmberObject.extend({
-  init: function() {
+  init() {
     this.validKeys = this.keys;
   },
 
-  parse: function(){
+  parse() {
     var url       = this.url,
         validKeys = this.validKeys,
         data      = {};
