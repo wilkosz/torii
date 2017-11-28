@@ -81,7 +81,7 @@ var Facebook = Provider.extend({
 
   // API:
   //
-  open: function(options){
+  open(options) {
     if (options === undefined) options = {};
     var scope = this.get('scope');
     var authType = options.authType;
@@ -94,7 +94,7 @@ var Facebook = Provider.extend({
       .then(fbNormalize);
   },
 
-  settings: function(){
+  settings() {
     return {
       status: true,
       cookie: true,

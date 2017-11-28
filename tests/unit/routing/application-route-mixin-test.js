@@ -25,12 +25,12 @@ test("beforeModel calls checkLogin after _super#beforeModel", function(assert){
   var callOrder = [];
   route = Route
     .extend({
-      beforeModel: function() {
+      beforeModel() {
         callOrder.push('super');
       }
     })
     .extend(ApplicationRouteMixin, {
-      checkLogin: function() {
+      checkLogin() {
         callOrder.push('mixin');
       }
     }).create();
@@ -46,7 +46,7 @@ test("beforeModel calls checkLogin after promise from _super#beforeModel is reso
   var callOrder = [];
   route = Route
     .extend({
-      beforeModel: function() {
+      beforeModel() {
         return new EmberPromise(function(resolve){
           later(function(){
             callOrder.push('super');
@@ -56,7 +56,7 @@ test("beforeModel calls checkLogin after promise from _super#beforeModel is reso
       }
     })
     .extend(ApplicationRouteMixin, {
-      checkLogin: function() {
+      checkLogin() {
         callOrder.push('mixin');
       }
     }).create();
@@ -74,7 +74,7 @@ test('checkLogic fails silently when no session is available', function(assert){
   var fetchCalled = false;
   var route = Route.extend(ApplicationRouteMixin, {
     session: {
-      fetch: function() {
+      fetch() {
         fetchCalled = true;
         return reject('no session is available');
       }

@@ -33,7 +33,7 @@ export default Service.extend(Ember._ProxyMixin, {
   // Make these properties one-way.
   setUnknownProperty() {},
 
-  open: function(provider, options){
+  open(provider, options) {
     var owner     = getOwner(this),
         torii     = getOwner(this).lookup('service:torii'),
         sm        = this.get('stateMachine');
@@ -58,7 +58,7 @@ export default Service.extend(Ember._ProxyMixin, {
     });
   },
 
-  fetch: function(provider, options){
+  fetch(provider, options) {
     var owner     = getOwner(this),
         sm        = this.get('stateMachine');
 
@@ -80,7 +80,7 @@ export default Service.extend(Ember._ProxyMixin, {
     });
   },
 
-  close: function(provider, options){
+  close(provider, options) {
     var owner     = getOwner(this),
         sm        = this.get('stateMachine');
 

@@ -31,16 +31,16 @@ test('ApplicationRoute#checkLogin is not called when no authenticated routes are
   var checkLoginCalled = false;
 
   bootApp({
-    map: function _map() {
+    map() {
       routesConfigured = true;
     },
-    setup: function() {
+    setup() {
       app.register('route:application', Route.extend());
     }
   });
   var applicationRoute = lookup(app, 'route:application');
   applicationRoute.reopen({
-    checkLogin: function() {
+    checkLogin() {
       checkLoginCalled = true;
     }
   });
@@ -57,18 +57,18 @@ test('ApplicationRoute#checkLogin is called when an authenticated route is prese
   var checkLoginCalled = false;
 
   bootApp({
-    map: function() {
+    map() {
       routesConfigured = true;
       this.authenticatedRoute('account');
     },
-    setup: function() {
+    setup() {
       app.register('route:application', Route.extend());
       app.register('route:account', Route.extend());
     }
   });
   var applicationRoute = lookup(app, 'route:application');
   applicationRoute.reopen({
-    checkLogin: function() {
+    checkLogin() {
       checkLoginCalled = true;
     }
   });
@@ -86,18 +86,18 @@ test('ApplicationRoute#checkLogin returns the correct name of the session variab
     sessionFound = false;
 
   bootApp({
-    map: function() {
+    map() {
       routesConfigured = true;
       this.authenticatedRoute('account');
     },
-    setup: function() {
+    setup() {
       app.register('route:application', Route.extend());
       app.register('route:account', Route.extend());
     }
   });
   var applicationRoute = lookup(app, 'route:application');
   applicationRoute.reopen({
-    checkLogin: function() {
+    checkLogin() {
       sessionFound = this.get('testName');
     }
   });
@@ -114,11 +114,11 @@ test('authenticated routes get authenticate method', function(assert){
   configuration.sessionServiceName = 'session';
 
   bootApp({
-    map: function() {
+    map() {
       this.route('home');
       this.authenticatedRoute('account');
     },
-    setup: function() {
+    setup() {
       app.register('route:application', Route.extend());
       app.register('route:account', Route.extend());
       app.register('route:home', Route.extend());
@@ -136,7 +136,7 @@ test('lazily created authenticated routes get authenticate method', function(ass
   configuration.sessionServiceName = 'session';
 
   bootApp({
-    map: function() {
+    map() {
       this.route('home');
       this.authenticatedRoute('account');
     }
@@ -156,11 +156,11 @@ test('session.attemptedTransition is set before redirecting away from authentica
   var attemptedTransition = null;
 
   bootApp({
-    map: function() {
+    map() {
       this.route('public');
       this.authenticatedRoute('secret');
     },
-    setup: function() {
+    setup() {
       app.register('route:application', Route.extend());
       app.register('route:secret', Route.extend());
     }
@@ -169,7 +169,7 @@ test('session.attemptedTransition is set before redirecting away from authentica
   var applicationRoute = lookup(app, 'route:application');
   applicationRoute.reopen({
     actions: {
-      accessDenied: function() {
+      accessDenied() {
         attemptedTransition = this.get('session').attemptedTransition;
       }
     }

@@ -23,7 +23,7 @@ export class ToriiRedirectError extends EmberError {
 
 var RedirectHandler = EmberObject.extend({
 
-  run: function(){
+  run() {
     var windowObject = this.windowObject;
 
     return new EmberPromise(function(resolve, reject){
@@ -50,7 +50,7 @@ var RedirectHandler = EmberObject.extend({
 
 RedirectHandler.reopenClass({
   // untested
-  handle: function(windowObject){
+  handle(windowObject) {
     var handler = RedirectHandler.create({windowObject: windowObject});
     return handler.run();
   }

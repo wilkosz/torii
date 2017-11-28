@@ -96,7 +96,7 @@ test('Provider#open assert.throws when any required response params are missing'
   });
 
   var mockPopup = {
-    open: function(/*url, responseParams*/){
+    open() /*url, responseParams*/{
       assert.ok(true, 'calls popup.open');
 
       return resolve({state: 'state'});
@@ -130,7 +130,7 @@ test('should use the value of provider.responseType as key for the authorization
   });
 
   var mockPopup = {
-    open: function(/*url, responseParams*/){
+    open() /*url, responseParams*/{
       assert.ok(true, 'calls popup.open');
       return resolve({ 'token_id': 'test', 'authorization_code': 'pief', 'state': 'test-state' });
     }
@@ -192,7 +192,7 @@ test('URI-decodes the authorization code', function(assert){
   });
 
   var mockPopup = {
-    open: function(/*url, responseParams*/){
+    open() /*url, responseParams*/{
       return resolve({
         'token_id': encodeURIComponent('test=='),
         'authorization_code': 'pief',

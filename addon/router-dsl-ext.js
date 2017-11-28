@@ -12,7 +12,7 @@ proto.authenticatedRoute = function() {
 };
 
 Router.reopen({
-  _initRouterJs: function() {
+  _initRouterJs() {
     currentMap = [];
     this._super.apply(this, arguments);
     let routerLib = getRouterLib(this);

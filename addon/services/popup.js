@@ -40,15 +40,15 @@ function prepareOptions(options){
 var Popup = EmberObject.extend(Evented, UiServiceMixin, {
 
   // Open a popup window.
-  openRemote: function(url, pendingRequestKey, options){
+  openRemote(url, pendingRequestKey, options) {
     var optionsString = stringifyOptions(prepareOptions(options || {}));
     this.remote = window.open(url, pendingRequestKey, optionsString);
   },
 
-  closeRemote: function(){
+  closeRemote() {
   },
 
-  pollRemote: function(){
+  pollRemote() {
     if (!this.remote) {
       return;
     }

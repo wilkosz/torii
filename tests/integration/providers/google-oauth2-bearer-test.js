@@ -15,7 +15,7 @@ var opened, mockPopup, providerConfig;
 module('Integration | Provider | Google Bearer', {
   beforeEach() {
     mockPopup = {
-      open: function(){
+      open() {
         opened = true;
         return resolve({ access_token: 'test' });
       }

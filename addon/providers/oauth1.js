@@ -11,11 +11,11 @@ var Oauth1 = Provider.extend({
 
   requestTokenUri: configurable('requestTokenUri'),
 
-  buildRequestTokenUrl: function(){
+  buildRequestTokenUrl() {
     return this.get('requestTokenUri');
   },
 
-  open: function(options){
+  open(options) {
     var name        = this.get('name'),
         url         = this.buildRequestTokenUrl();
 

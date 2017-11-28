@@ -15,7 +15,7 @@ module('Integration | Provider | Edmodo Connect', {
   beforeEach() {
     app = startApp({loadInitializers: true});
     mockPopup = {
-      open: function(){
+      open() {
         opened = true;
         return resolve({ access_token: 'test' });
       }

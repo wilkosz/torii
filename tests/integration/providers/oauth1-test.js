@@ -11,7 +11,7 @@ const { module, test } = QUnit;
 var torii, app;
 
 var opened, openedUrl, mockPopup = {
-  open: function(url){
+  open(url) {
     openedUrl = url;
     opened = true;
     return resolve({});

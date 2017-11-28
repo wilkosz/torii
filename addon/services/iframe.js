@@ -5,17 +5,17 @@ import UiServiceMixin from 'torii/mixins/ui-service-mixin';
 
 var Iframe = EmberObject.extend(Evented, UiServiceMixin, {
 
-  openRemote: function(url){
+  openRemote(url) {
     this.remote = $('<iframe src="'+url+'" id="torii-iframe"></iframe>');
     var iframeParent = '.torii-iframe-placeholder';
     $(iframeParent).append(this.remote);
   },
 
-  closeRemote: function(){
+  closeRemote() {
     this.remote.remove();
   },
 
-  pollRemote: function(){
+  pollRemote() {
     if ($('#torii-iframe').length === 0) {
       this.trigger('didClose');
     }

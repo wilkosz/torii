@@ -21,7 +21,7 @@ var buildMockWindow = function(windowName){
 
 var buildPopupIdGenerator = function(popupId){
   return {
-    generate: function(){
+    generate() {
       return popupId;
     }
   };

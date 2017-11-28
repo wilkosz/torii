@@ -8,7 +8,7 @@ import EmberObject from '@ember/object';
 
 export default EmberObject.extend({
 
-  open: function(){
+  open() {
     return reject("Dummy authentication failure");
   }
 

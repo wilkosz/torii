@@ -9,7 +9,7 @@ import EmberObject from '@ember/object';
 
 export default EmberObject.extend({
 
-  open: function(authorization){
+  open(authorization) {
     return EmberPromise.resolve(authorization);
   }
 

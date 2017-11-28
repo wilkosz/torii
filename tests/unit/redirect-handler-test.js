@@ -9,16 +9,16 @@ function buildMockWindow(windowName, url){
   return {
     name: windowName,
     location: {
-      toString: function(){
+      toString() {
         return url;
       }
     },
     localStorage: {
-      setItem: function() {},
-      getItem: function() {},
-      removeItem: function() {}
+      setItem() {},
+      getItem() {},
+      removeItem() {}
     },
-    close: function() {}
+    close() {}
   };
 }
 
