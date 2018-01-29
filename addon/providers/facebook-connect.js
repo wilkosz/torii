@@ -1,4 +1,4 @@
-/* global FB, $ */
+/* global FB */
 
 /**
  * This class implements OAuth authorization for Facebook
@@ -8,12 +8,16 @@
  */
 
 import { run } from '@ember/runloop';
-
 import { Promise as EmberPromise } from 'rsvp';
-import { on } from '@ember/object/evented';
-
 import Provider from 'torii/providers/base';
 import { configurable } from 'torii/configuration';
+
+self._loadFacebookConnectScript = function(src) {
+  var scriptTag = document.createElement('script'); // create a script tag
+  var firstScriptTag = document.getElementsByTagName('script')[0]; // find the first script tag in the document
+  scriptTag.src = src; // set the source of the script to your script
+  firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag); // append the script to the DOM
+}
 
 var fbPromise;
 
@@ -31,7 +35,7 @@ function fbLoad(settings){
       FB.init(settings);
       run(null, resolve);
     };
-    $.getScript('//connect.facebook.net/' + locale + '/sdk.js');
+    self._loadFacebookConnectScript('//connect.facebook.net/' + locale + '/sdk.js');
   }).then(function(){
     window.fbAsyncInit = original;
     if (window.fbAsyncInit) {
@@ -79,6 +83,11 @@ var Facebook = Provider.extend({
   channelUrl: configurable('channelUrl', null),
   locale: configurable('locale', 'en_US'),
 
+  init() {
+    this._super(...arguments);
+    fbLoad(this.settings());
+  },
+
   // API:
   //
   open(options) {
@@ -87,7 +96,7 @@ var Facebook = Provider.extend({
     var authType = options.authType;
     var returnScopes = this.get('returnScopes');
 
-    return fbLoad( this.settings() )
+    return fbLoad(this.settings())
       .then(function(){
         return fbLogin(scope, returnScopes, authType);
       })
@@ -104,15 +113,7 @@ var Facebook = Provider.extend({
       channelUrl: this.get('channelUrl'),
       locale: this.get('locale')
     };
-  },
-
-  // Load Facebook's script eagerly, so that the window.open
-  // in FB.login will be part of the same JS frame as the
-  // click itself.
-  loadFbLogin: on('init', function(){
-    fbLoad( this.settings() );
-  })
-
+  }
 });
 
 export default Facebook;

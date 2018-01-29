@@ -1,6 +1,5 @@
 import { merge } from '@ember/polyfills';
 import { run } from '@ember/runloop';
-import $ from 'jquery';
 import buildFBMock from '../../helpers/build-fb-mock';
 import { configure } from 'torii/configuration';
 import startApp from '../../helpers/start-app';
@@ -9,15 +8,15 @@ import QUnit from 'qunit';
 
 const { module, test } = QUnit;
 
-var originalGetScript = $.getScript,
-    originalFB = window.FB;
+var originalLoadFacebookConnectScript = self._loadFacebookConnectScript;
+var originalFB = window.FB;
 let providerConfiguration;
 
 var torii, app;
 
 module('Integration | Provider | Facebook Connect', {
   beforeEach() {
-    app = startApp({loadInitializers: true});
+    app = startApp({ loadInitializers: true });
     torii = lookup(app, 'service:torii');
     providerConfiguration = {
       appId: 'dummy'
@@ -31,13 +30,13 @@ module('Integration | Provider | Facebook Connect', {
   },
   afterEach() {
     window.FB = originalFB;
-    $.getScript = originalGetScript;
+    self._loadFacebookConnectScript = originalLoadFacebookConnectScript;
     run(app, 'destroy');
   }
 });
 
 test("Opens facebook connect session", function(assert){
-  $.getScript = function(){
+  self._loadFacebookConnectScript = function(){
     window.fbAsyncInit();
   };
   run(function(){
@@ -50,7 +49,7 @@ test("Opens facebook connect session", function(assert){
 });
 
 test("Returns the scopes granted when configured", function(assert){
-  $.getScript = function(){
+  self._loadFacebookConnectScript = function(){
     window.fbAsyncInit();
   };
   configure({
@@ -66,7 +65,7 @@ test("Returns the scopes granted when configured", function(assert){
 });
 
 test("Supports custom auth_type on login", function(assert){
-  $.getScript = function(){
+  self._loadFacebookConnectScript = function(){
     window.fbAsyncInit();
   };
   run(function(){
