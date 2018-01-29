@@ -126,7 +126,7 @@ test("open does not resolve when receiving a storage event for the wrong popup i
 
   localStorage.setItem(PopupIdSerializer.serialize("invalid"), "http://authServer");
   // Need to manually trigger storage event, since it doesn't fire in the current window
-  window.dispatchEvent(buildMockStorageEvent("invalid", "http://authServer"))
+  window.dispatchEvent(buildMockStorageEvent("invalid", "http://authServer"));
 
   setTimeout(function(){
     assert.ok(!promise.isFulfilled, 'promise is not fulfulled by invalid data');
