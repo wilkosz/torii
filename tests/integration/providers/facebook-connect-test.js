@@ -5,10 +5,12 @@ import { configure } from 'torii/configuration';
 import startApp from '../../helpers/start-app';
 import lookup from '../../helpers/lookup';
 import QUnit from 'qunit';
-
+import {
+  overrideLoadFacebookConnectScript,
+  resetLoadFacebookConnectScript
+} from 'torii/providers/-private/utils';
 const { module, test } = QUnit;
 
-var originalLoadFacebookConnectScript = self._loadFacebookConnectScript;
 var originalFB = window.FB;
 let providerConfiguration;
 
@@ -30,15 +32,15 @@ module('Integration | Provider | Facebook Connect', {
   },
   afterEach() {
     window.FB = originalFB;
-    self._loadFacebookConnectScript = originalLoadFacebookConnectScript;
+    resetLoadFacebookConnectScript();
     run(app, 'destroy');
   }
 });
 
 test("Opens facebook connect session", function(assert){
-  self._loadFacebookConnectScript = function(){
+  overrideLoadFacebookConnectScript(function(){
     window.fbAsyncInit();
-  };
+  });
   run(function(){
     torii.open('facebook-connect').then(function(){
       assert.ok(true, "Facebook connect opened");
@@ -49,9 +51,9 @@ test("Opens facebook connect session", function(assert){
 });
 
 test("Returns the scopes granted when configured", function(assert){
-  self._loadFacebookConnectScript = function(){
+  overrideLoadFacebookConnectScript(function(){
     window.fbAsyncInit();
-  };
+  });
   configure({
     providers: {
       'facebook-connect': merge(providerConfiguration, {returnScopes: true})
@@ -65,9 +67,9 @@ test("Returns the scopes granted when configured", function(assert){
 });
 
 test("Supports custom auth_type on login", function(assert){
-  self._loadFacebookConnectScript = function(){
+  overrideLoadFacebookConnectScript(function(){
     window.fbAsyncInit();
-  };
+  });
   run(function(){
     torii.open('facebook-connect', {authType: 'rerequest'}).then(function(data){
       assert.equal(5678, data.expiresIn, 'expriesIn extended when rerequest found');

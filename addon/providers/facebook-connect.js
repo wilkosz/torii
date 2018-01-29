@@ -10,14 +10,8 @@
 import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import Provider from 'torii/providers/base';
+import { loadFacebookConnectScript } from './-private/utils';
 import { configurable } from 'torii/configuration';
-
-self._loadFacebookConnectScript = function(src) {
-  var scriptTag = document.createElement('script'); // create a script tag
-  var firstScriptTag = document.getElementsByTagName('script')[0]; // find the first script tag in the document
-  scriptTag.src = src; // set the source of the script to your script
-  firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag); // append the script to the DOM
-}
 
 var fbPromise;
 
@@ -35,7 +29,7 @@ function fbLoad(settings){
       FB.init(settings);
       run(null, resolve);
     };
-    self._loadFacebookConnectScript('//connect.facebook.net/' + locale + '/sdk.js');
+    loadFacebookConnectScript('//connect.facebook.net/' + locale + '/sdk.js');
   }).then(function(){
     window.fbAsyncInit = original;
     if (window.fbAsyncInit) {

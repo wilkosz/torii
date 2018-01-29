@@ -35,8 +35,9 @@ var ServicesMixin = Mixin.create({
   // Services that use this mixin should implement openRemote
   //
   open(url, keys, options) {
-    var service   = this,
-        lastRemote = this.remote;
+    let service = this;
+    let lastRemote = this.remote;
+    let storageToriiEventHandler;
 
     return new EmberPromise(function(resolve, reject){
       if (lastRemote) {
@@ -44,7 +45,7 @@ var ServicesMixin = Mixin.create({
       }
 
       var remoteId = service.remoteIdGenerator.generate();
-      service.storageToriiEventHandler = function(storageEvent) {
+      storageToriiEventHandler = function(storageEvent) {
         var remoteIdFromEvent = PopupIdSerializer.deserialize(storageEvent.key);
         if (remoteId === remoteIdFromEvent) {
           var data = parseMessage(storageEvent.newValue, keys);
@@ -100,11 +101,11 @@ var ServicesMixin = Mixin.create({
           reject(new Error("remote was closed, authorization was denied, or an authentication message otherwise not received before the window closed."));
         }, 100);
       });
-      window.addEventListener('storage', service.storageToriiEventHandler);
+      window.addEventListener('storage', storageToriiEventHandler);
     }).finally(function(){
       // didClose will reject this same promise, but it has already resolved.
       service.close();
-      window.removeEventListener('storage', service.storageToriiEventHandler);
+      window.removeEventListener('storage', storageToriiEventHandler);
     });
   },
 
