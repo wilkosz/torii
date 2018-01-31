@@ -5,10 +5,7 @@ import { configure } from 'torii/configuration';
 import startApp from '../../helpers/start-app';
 import lookup from '../../helpers/lookup';
 import QUnit from 'qunit';
-import {
-  overrideLoadFacebookConnectScript,
-  resetLoadFacebookConnectScript
-} from 'torii/providers/-private/utils';
+import { overrideLoadScript, resetLoadScript } from 'torii/providers/-private/utils';
 const { module, test } = QUnit;
 
 var originalFB = window.FB;
@@ -32,13 +29,13 @@ module('Integration | Provider | Facebook Connect', {
   },
   afterEach() {
     window.FB = originalFB;
-    resetLoadFacebookConnectScript();
+    resetLoadScript();
     run(app, 'destroy');
   }
 });
 
 test("Opens facebook connect session", function(assert){
-  overrideLoadFacebookConnectScript(function(){
+  overrideLoadScript(function(){
     window.fbAsyncInit();
   });
   run(function(){
@@ -51,7 +48,7 @@ test("Opens facebook connect session", function(assert){
 });
 
 test("Returns the scopes granted when configured", function(assert){
-  overrideLoadFacebookConnectScript(function(){
+  overrideLoadScript(function(){
     window.fbAsyncInit();
   });
   configure({
@@ -67,7 +64,7 @@ test("Returns the scopes granted when configured", function(assert){
 });
 
 test("Supports custom auth_type on login", function(assert){
-  overrideLoadFacebookConnectScript(function(){
+  overrideLoadScript(function(){
     window.fbAsyncInit();
   });
   run(function(){

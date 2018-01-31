@@ -10,7 +10,7 @@
 import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
 import Provider from 'torii/providers/base';
-import { loadFacebookConnectScript } from './-private/utils';
+import { loadScript } from './-private/utils';
 import { configurable } from 'torii/configuration';
 
 var fbPromise;
@@ -29,7 +29,7 @@ function fbLoad(settings){
       FB.init(settings);
       run(null, resolve);
     };
-    loadFacebookConnectScript('//connect.facebook.net/' + locale + '/sdk.js');
+    loadScript('//connect.facebook.net/' + locale + '/sdk.js');
   }).then(function(){
     window.fbAsyncInit = original;
     if (window.fbAsyncInit) {

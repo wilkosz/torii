@@ -1,4 +1,5 @@
 import { Promise as EmberPromise } from 'rsvp';
+import { run } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
 import OAuth2Code from 'torii/providers/oauth2-code';
 import { configurable } from 'torii/configuration';
@@ -96,25 +97,20 @@ var GoogleOauth2BearerV2 = OAuth2Code.extend({
           if (jsonResponse.audience === clientId) {
             // authentication succeeded. Add name and redirectUri to the
             // authentication data and resolve
-            resolve(assign(authData, { provider: name, redirectUri: redirectUri }));
+            run(() => resolve(assign(authData, { provider: name, redirectUri: redirectUri })));
           } else if (jsonResponse.audience === undefined) {
             // authentication failed because the response from the server
             // is not as expected (no 'audience' field)
-            reject(new Error("Unexpected response from token validation " +
-              "server. The 'audience' field may be missing."));
+            run(() => reject(new Error("Unexpected response from token validation server. The 'audience' field may be missing.")));
           } else {
             // authentication failed because the token is invalid or has
             // been tempered with
-            reject(new Error("Access token is invalid or has been " +
-              "tempered with. You may be subject to a 'confused deputy' " +
-              "attack."));
+            run(() => reject(new Error("Access token is invalid or has been tempered with. You may be subject to a 'confused deputy' attack.")));
           }
         };
         xhr.onerror = function() {
           // authentication failed because the validation request failed
-          reject(new Error("Token validation request failed with status '" +
-            xhr.statusText + "' (server '" + tokenValidationUrl + "' '" +
-            xhr.responseText + "')."));
+          run(() => reject(new Error(`Token validation request failed with status '${xhr.statusText}' (server '${tokenValidationUrl}' '${xhr.responseText}').`)));
         };
         xhr.open('GET', `${tokenValidationUrl}?access_token=${encodeURIComponent(authData['access_token'])}`);
         xhr.send();
