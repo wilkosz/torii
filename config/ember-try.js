@@ -74,10 +74,10 @@ module.exports = function() {
           }
         },
         {
-          name: 'ember-2.12.2',
+          name: 'ember-lts-2.12',
           npm: {
             devDependencies: {
-              'ember-source': '2.12.2',
+              'ember-source': '~2.12.0',
               'ember-native-dom-event-dispatcher': null
             },
           }
@@ -122,9 +122,16 @@ module.exports = function() {
           npm: {
             devDependencies: {}
           }
+        },
+        {
+          name: 'ember-default-jquery',
+          npm: {
+            devDependencies: {
+              'ember-native-dom-event-dispatcher': null
+            }
+          }
         }
       ]
     };
   });
-}
-
+};
