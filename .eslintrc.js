@@ -15,7 +15,6 @@ module.exports = {
     browser: true
   },
   rules: {
-    "ember/no-global-jquery": 0,
     "ember/avoid-leaking-state-in-ember-objects": 0
   },
   overrides: [
