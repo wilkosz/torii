@@ -78,7 +78,7 @@ var GoogleOauth2BearerV2 = OAuth2Code.extend({
 
       // Token validation. For details, see
       // https://developers.google.com/identity/protocols/OAuth2UserAgent#validatetoken
-      return new EmberPromise( function (resolve, reject) {
+      return new EmberPromise(function(resolve, reject) {
         // Token validation request
         let xhr = new XMLHttpRequest();
         xhr.overrideMimeType('application/json');
@@ -114,8 +114,6 @@ var GoogleOauth2BearerV2 = OAuth2Code.extend({
         };
         xhr.open('GET', `${tokenValidationUrl}?access_token=${encodeURIComponent(authData['access_token'])}`);
         xhr.send();
-      }).then(function (authenticationData) {
-        return authenticationData;
       });
     });
   },
