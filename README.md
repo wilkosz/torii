@@ -663,6 +663,7 @@ There are a number of ember-cli addons that allow you to use Torii with other pr
   * [torii-provider-meetup-oauth2](https://github.com/gmurphey/torii-provider-meetup-oauth2) via @gmurphey
   * [torii-spotify](https://github.com/balinterdi/torii-spotify) via @balinterdi
   * [torii-azure-provider](https://github.com/ghurlman/torii-azure-provider) via @ghurlman
+  * [torii-azure-ad2-provider](https://github.com/erikap/torii-azure-ad2-provider) via @erikap
   * [torii-provider-arcgis](https://github.com/dbouwman/torii-provider-arcgis) via @dbouwman
   * [torii-globe](https://github.com/jedld/torii-globe) via @jedld
 
