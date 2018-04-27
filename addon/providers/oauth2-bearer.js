@@ -19,16 +19,16 @@ var Oauth2Bearer = Provider.extend({
         redirectUri = this.get('redirectUri'),
         responseParams = this.get('responseParams');
 
-    return this.get('popup').open(url, responseParams, options).then(function(authData){
+    return this.get('popup').open(url, responseParams, options).then(function(authData) {
       var missingResponseParams = [];
 
-      responseParams.forEach(function(param){
+      responseParams.forEach(function(param) {
         if (authData[param] === undefined) {
           missingResponseParams.push(param);
         }
       });
 
-      if (missingResponseParams.length){
+      if (missingResponseParams.length) {
         throw new Error("The response from the provider is missing " +
               "these required response params: " + missingResponseParams.join(', '));
       }
