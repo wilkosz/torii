@@ -83,20 +83,20 @@ StateMachine.prototype = {
     if (!state) {
       throw new Error('Unknown State: `' + nextStateName + '`');
     }
-    this.willTransition(stateName, nextStateName);
+    this.routeWillChange(stateName, nextStateName);
 
     this.state = state;
 
     this.currentStateName = nextStateName;
-    this.didTransition(stateName, nextStateName);
+    this.routeDidChange(stateName, nextStateName);
   },
 
   beforeTransition(options, fn) {
-    this._transition('willTransition', options, fn);
+    this._transition('routeWillChange', options, fn);
   },
 
   afterTransition(options, fn) {
-    this._transition('didTransition', options, fn);
+    this._transition('routeDidChange', options, fn);
   },
 
   _transition(event, filter, fn) {
@@ -155,12 +155,12 @@ StateMachine.prototype = {
     });
   },
 
-  willTransition(from, to) {
-    this._notify('willTransition', from, to);
+  routeWillChange(from, to) {
+    this._notify('routeWillChange', from, to);
   },
 
-  didTransition(from, to) {
-    this._notify('didTransition', from, to);
+  routeDidChange(from, to) {
+    this._notify('routeDidChange', from, to);
   },
 
   _notify(name, from, to) {
